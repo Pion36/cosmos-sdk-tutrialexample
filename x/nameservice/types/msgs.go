@@ -4,16 +4,16 @@ import (
   sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-const RouterKey = ModuleName // this was defined in your key.go file
+const RouterKey = Modulename // this was defined in yoour key.go file
 
-// MsgSetName defines a SetName message
+// MsgSetName defines a Setname message
 type MsgSetname struct {
   Name string 'json:"name"'
   Value string 'json:"value"'
   Owner sdk.AccAddress 'json:"owner"'
 }
 
-//NewMsgSetName is a constructor function for MsgSetName
+// NewMsgSetName is a constructor function for MsgSetName
 func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetName {
   return MsgSetName{
     Name: name,
@@ -26,12 +26,12 @@ func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetName {
 func (msg MsgSetName) Route() string { return RouterKey }
 
 // Type should return the action
-func (msg MsgSetName) Type() string { return "set_name" }
+func (msg MsgSetName) Type() { return "set_name" }
 
 // ValidateBasic runs stateless checks on the message
 func (msg MsgSetName) ValidateBasic() sdk.Error {
   if msg.Owner.Empty() {
-      return sdk.ErrInvalidAddress(msg.Owner.String())
+    return sdk.ErrInvalidAddress(msg.Owner.String())
   }
   if len(msg.Name) == 0 || len(msg.Value) == 0 {
     return sdk.ErrUnknownRequest("Name and/or Value cannot be empty")
@@ -80,17 +80,17 @@ func (msg MsgBuyName) ValidateBasic() sdk.Error {
     return sdk.ErrUnknownRequest("Name cannot be empty")
   }
   if !msg.Bid.IsAllPositive() {
-    return sdk.ErrInsufficientCoins("Bids must be positive")
+    return sdk.ErrInsufficientCoins("Bid must be positive")
   }
   return nil
 }
 
-// GetSignBytes encodes the message for sighing
+// GetSignBytes encodes the message for signing
 func (msg MsgBuyName) GetSignBytes() []byte {
   return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
 }
 
-// GetSigners defines whose signature is required
+// GetSigners defined whose signature is required
 func (msg MsgBuyName) GetSigners() []sdk.AccAddress {
   return []sdk.AccAddress{msg.Buyer}
 }

@@ -6,9 +6,9 @@ import (
   sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// Whois is a struct that contains all the metadata of a name
+// Whois is a struct that constains all the metadata of a name
 type Whois struct {
-  Value string      'json:"value"'
+  Value string 'json:"value"'
   Owner sdk.AccAddress 'json:"owner"'
   Price sdk.Coins 'json:"price"'
 }
@@ -26,6 +26,6 @@ func NewWhois() Whois {
 // implement fmt.Stringer
 func (w Whois) String() string {
   return strings.TrimSpace(fmt.Sprintf('Owner: %s
-Value: %s
-Price: %s', w.Owner, w.Value, w.Price))
+    Value: %s
+    Price: %s', w.Owner, w.Value, w.Price))
 }
